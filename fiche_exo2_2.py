@@ -21,8 +21,11 @@ RAPPEL DES COMPLEXITÉS :
   └──────────────────────────────┴─────────────────┘
 """
 
+import os
 import time
 import matplotlib.pyplot as plt
+
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 
 
 # ==============================================================================
@@ -307,9 +310,11 @@ def main():
     plt.grid(True, which="both", linestyle="--", alpha=0.5)
     plt.legend()
     plt.tight_layout()
-    plt.savefig("graphe_exo2_2.png", dpi=140)
+
+    chemin_export = os.path.join(SCRIPT_DIR, "graphe_exo2_2.png")
+    plt.savefig(chemin_export, dpi=140)
     plt.show()
-    print("\nGraphique sauvegardé : graphe_exo2_2.png")
+    print(f"\nGraphique sauvegardé : {chemin_export}")
 
 
 # ==============================================================================
