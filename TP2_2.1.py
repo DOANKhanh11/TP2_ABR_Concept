@@ -1,5 +1,9 @@
+import os
 import time
 import matplotlib.pyplot as plt
+
+# Dossier du script (pour sauvegarder le graphique au bon endroit)
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 
 # =========================================================
 # Classe Noeud
@@ -238,10 +242,12 @@ def main():
         liste_complet.append(temps_complet)
         liste_filiforme.append(temps_filiforme)
 
-        # Arrêt si le temps de Creer-ABR-complet dépasse 3 minutes
+        # Arrêt si l'un des deux temps dépasse 3 minutes (180 secondes)
         if temps_complet > 180:
-            print("\nTemps de Creer-ABR-complet supérieur à 3 minutes.")
-            print("Fin des tests.")
+            print("\nTemps de Creer-ABR-complet supérieur à 3 minutes. Fin des tests.")
+            break
+        if temps_filiforme > 180:
+            print("\nTemps de Creer-ABR-filiforme supérieur à 3 minutes. Fin des tests.")
             break
     
 
@@ -270,8 +276,12 @@ def main():
     plt.grid(True, which="both", linestyle="--", alpha=0.5)
     plt.xscale("log")
     plt.yscale("log")
-    plt.savefig("graphe_ABR.png")
-    plt.show()
+    plt.tight_layout()
+
+    chemin_export = os.path.join(SCRIPT_DIR, "graphe_exo2_1.png")
+    plt.savefig(chemin_export, dpi=150)
+    plt.close()
+    print(f"\nGraphique sauvegardé : {chemin_export}")
 
 # =========================================================
 # Exécution du programme
