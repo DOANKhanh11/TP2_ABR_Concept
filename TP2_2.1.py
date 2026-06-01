@@ -38,8 +38,8 @@ def inserer(racine, valeur):
             if courant.gauche is None:
                 courant.gauche = nouveau
                 break
-
-            courant = courant.gauche
+            else:
+                courant = courant.gauche
 
         # aller à droite
         else:
@@ -47,8 +47,8 @@ def inserer(racine, valeur):
             if courant.droite is None:
                 courant.droite = nouveau
                 break
-
-            courant = courant.droite
+            else:
+                courant = courant.droite
 
     return racine
 
@@ -280,7 +280,7 @@ def main():
 
     chemin_export = os.path.join(SCRIPT_DIR, "graphe_exo2_1.png")
     plt.savefig(chemin_export, dpi=150)
-    plt.close()
+    plt.show()
     print(f"\nGraphique sauvegardé : {chemin_export}")
 
 # =========================================================
