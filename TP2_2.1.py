@@ -72,7 +72,6 @@ def generer_tableau_complet(p):
 
     return T
 
-print(generer_tableau_complet(3));
 
 # =========================================================
 # Création de l'ABR complet
@@ -135,6 +134,27 @@ def afficher_infixe(racine):
 
 
 # =========================================================
+# Parcours suffixe (postorder) — itératif pour éviter
+# la limite de récursion sur les ABR filiformes
+# =========================================================
+
+def parcours_suffixe(racine):
+    resultat = []
+    pile = [(racine, False)]
+    while pile:
+        noeud, visite = pile.pop()
+        if noeud is None:
+            continue
+        if visite:
+            resultat.append(noeud.valeur)
+        else:
+            pile.append((noeud, True))
+            pile.append((noeud.droite, False))
+            pile.append((noeud.gauche, False))
+    return resultat
+
+
+# =========================================================
 # Mesure du temps ABR complet
 # =========================================================
 
@@ -189,6 +209,12 @@ def main():
     print("      TEST DES ABR")
     print("========================================")
 
+    # --- Question (a) : parcours suffixe de l'ABR complet à n=31 (p=4) ---
+    abr_31 = creer_ABR_complet(4)
+    print("Parcours suffixe ABR complet n=31 (p=4) :")
+    print(parcours_suffixe(abr_31))
+    print()
+
     p = 1
 
     while True:
@@ -212,9 +238,9 @@ def main():
         liste_complet.append(temps_complet)
         liste_filiforme.append(temps_filiforme)
 
-        # Arrêt si temps > 1 minutes
-        if temps_complet > 60 or temps_filiforme > 60:
-            print("\nTemps supérieur à 1 minutes.")
+        # Arrêt si le temps de Creer-ABR-complet dépasse 3 minutes
+        if temps_complet > 180:
+            print("\nTemps de Creer-ABR-complet supérieur à 3 minutes.")
             print("Fin des tests.")
             break
     
