@@ -267,7 +267,8 @@ def main():
 
     plt.legend()
 
-    plt.grid(True)
+    plt.grid(True, which="both", linestyle="--", alpha=0.5)
+    plt.xscale("log")
     plt.yscale("log")
     plt.savefig("graphe_ABR.png")
     plt.show()
